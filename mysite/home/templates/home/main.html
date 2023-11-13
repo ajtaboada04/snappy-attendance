@@ -1,0 +1,56 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ settings.APP_NAME }}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link rel="stylesheet" href="{% static 'your_app/styles.css' %}">
+</head>
+<body>
+
+<div class="container mt-5">
+    <div class="jumbotron bg-light text-center text-primary">
+        <h1 class="display-4">{{ settings.APP_NAME }}</h1>
+        <p class="lead">Precision and security in tracking attendance.</p>
+        <hr class="my-4">
+        <p>Efficiently manage classes and attendance records through your account.</p>
+        <a class="btn btn-outline-primary btn-lg" href="#" role="button" disabled>Login</a> <!-- Changed to 'a' tags for future linking -->
+        <a class="btn btn-outline-primary btn-lg" href="#" role="button" disabled>Register</a>
+    </div>
+
+    <div class="row text-center">
+        <div class="col-md-6 mb-4">
+            <div class="card border-primary">
+                <div class="card-body">
+                    <i class="fas fa-chalkboard-teacher fa-3x mb-3"></i>
+                    <h5 class="card-title">For Professors</h5>
+                    <p class="card-text">Organize classes and oversee attendance with ease.</p>
+                    <a class="btn btn-outline-primary" href="{% url 'professor_dashboard' %}" role="button" disabled>Professor Dashboard</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="card border-primary">
+                <div class="card-body">
+                    <i class="fas fa-user-graduate fa-3x mb-3"></i>
+                    <h5 class="card-title">For Students</h5>
+                    <p class="card-text">Track your attendance and keep your profile up to date effortlessly.</p>
+                   <a class="btn btn-outline-primary" href="{% url 'student_dashboard' %}" role="button">Student Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+

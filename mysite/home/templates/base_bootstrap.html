@@ -1,0 +1,44 @@
+{% extends "base_menu.html" %}
+{% block content %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+<meta name="dj4e" content="41ccf6d63155cae584db854adffaf830">
+
+<div class="container mt-4">
+    <div class="jumbotron bg-primary text-white">
+        <h1 class="display-4">Attendance Management System</h1>
+        <p class="lead">Enhancing the attendance tracking experience with precision and security.</p>
+        <hr class="my-4 bg-light">
+        <p>Access your account to manage your classes and attendance records efficiently.</p>
+        <button class="btn btn-light btn-lg" disabled>Login</button>
+        <button class="btn btn-light btn-lg" disabled>Register</button>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">For Professors</h5>
+                    <p class="card-text">Organize your classes, control attendance sessions, and oversee student attendance with a click.</p>
+                    <button class="btn btn-outline-primary" disabled>Professor Dashboard</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">For Students</h5>
+                    <p class="card-text">View your attendance record, enter class codes, and keep your profile updated seamlessly.</p>
+                    <button class="btn btn-outline-primary" disabled>Student Dashboard</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+{% endblock %}

@@ -1,0 +1,69 @@
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+<link rel="stylesheet" href="{% static 'styles.css' %}">
+
+<div class="container mt-5">
+    <div class="jumbotron bg-light text-center">
+        <h1 class="display-4 text-primary">{{ selected_class }}</h1>
+        <p class="lead">Manage attendance for your class. Attendance Code: <span id="attendanceCode">ABCD1234</span></p>
+        <button class="btn btn-info" id="generateCode">Generate New Code</button>
+        <hr class="my-4">
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <table class="table mt-4">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Student Name</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Jane Doe</td>
+                        <td>
+                            <select class="form-control status-select">
+                                <option value="present">Present</option>
+                                <option value="absent">Absent</option>
+                                <option value="late">Late</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>John Smith</td>
+                        <td>
+                            <select class="form-control status-select">
+                                <option value="present">Present</option>
+                                <option value="absent">Absent</option>
+                                <option value="late">Late</option>
+                            </select>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<script>
+    document.getElementById('generateCode').addEventListener('click', function() {
+        var randomCode = Math.random().toString(36).substr(2, 8).toUpperCase();
+        document.getElementById('attendanceCode').textContent = randomCode;
+    });
+
+    setInterval(function() {
+        var randomCode = Math.random().toString(36).substr(2, 8).toUpperCase();
+        document.getElementById('attendanceCode').textContent = randomCode;
+    }, 30000);
+</script>
+
+{% endblock %}

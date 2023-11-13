@@ -1,0 +1,59 @@
+/* student-dashboard.css */
+
+/* General padding and margins for the form */
+.form-group {
+  margin-bottom: 1rem;
+}
+
+/* Styling for the select dropdown */
+.select-class {
+  font-size: 1rem;
+  padding: 0.5rem;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+}
+
+/* Styling for the input */
+.input-code {
+  font-size: 1rem;
+  padding: 0.5rem;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+}
+
+/* Styling for the submit button */
+.btn-submit {
+  font-size: 1rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 0.25rem;
+  color: white;
+  background-color: #007bff;
+  border-color: #007bff;
+  display: block; /* Make the button block level to take the full width */
+  width: 100%;
+  cursor: pointer; /* Makes it clear the button is clickable */
+  margin-top: 1rem; /* Add some margin to the top for spacing */
+}
+
+.btn-submit:hover {
+  background-color: #0056b3;
+  border-color: #004085;
+}
+
+/* Enhancing focus on form fields */
+.select-class:focus,
+.input-code:focus {
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .select-class,
+  .input-code,
+  .btn-submit {
+    font-size: 0.9rem;
+    padding: 0.4rem;
+  }
+}
