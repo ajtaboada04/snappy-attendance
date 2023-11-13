@@ -1,6 +1,3 @@
-"""
-Django settings for samples project.
-"""
 
 import os
 
@@ -76,7 +73,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'dj4e-samples.wsgi.application'
+WSGI_APPLICATION = 'mysite.wsgi.application'
 
 
 # Database
@@ -86,8 +83,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'DUDB_3',
         'USER': 'DUDB_3',
-        'PASSWORD': '',
-        'HOST': '(my respective host)',
+        'PASSWORD': '8ReukdQCXc6u_kOaWNc3cYBaxU86Li4nWLUbq8Rv-j8',
+        'HOST': 'dockerlab.westeurope.cloudapp.azure.com',
         'PORT': '3306',
         'OPTIONS': {
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
