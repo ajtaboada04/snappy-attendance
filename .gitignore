@@ -2,4 +2,5 @@ __pycache__
 *.swp
 *.sqlite3
 django4
+django_env
 
