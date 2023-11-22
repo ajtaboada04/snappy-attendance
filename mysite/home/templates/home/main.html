@@ -18,8 +18,20 @@
         <p class="lead">Precision and security in tracking attendance.</p>
         <hr class="my-4">
         <p>Efficiently manage classes and attendance records through your account.</p>
-        <a class="btn btn-outline-primary btn-lg" href="#" role="button" disabled>Login</a> <!-- Changed to 'a' tags for future linking -->
-        <a class="btn btn-outline-primary btn-lg" href="#" role="button" disabled>Register</a>
+
+        {% block login %}
+
+        {% if user.is_authenticated %}
+
+        <h1>{{username}}</h1>
+
+        {% else %}
+        
+        <a class="btn btn-outline-primary btn-lg" href="{% url 'login' %}?next={% url 'home' %}" role="button">Login</a>
+
+        {% endif %}
+
+        {% endblock %}
     </div>
 
     <div class="row text-center">
