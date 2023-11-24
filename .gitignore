@@ -3,3 +3,6 @@ __pycache__
 *.sqlite3
 django4
 django_env
+azure_env
+.python_packages
+.venv
