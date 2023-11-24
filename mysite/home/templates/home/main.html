@@ -23,7 +23,7 @@
 
         {% if user.is_authenticated %}
 
-        <h1>{{username}}</h1>
+        <h1>Welcome back: <span style = font-color: "gray">{{user}}</span>!</h1>
 
         {% else %}
         
@@ -33,6 +33,8 @@
 
         {% endblock %}
     </div>
+
+    {%block dashboards%}
 
     <div class="row text-center">
         <div class="col-md-6 mb-4">
@@ -58,6 +60,7 @@
         </div>
     </div>
 </div>
+{% endblock %}
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
