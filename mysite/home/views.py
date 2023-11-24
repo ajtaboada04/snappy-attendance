@@ -2,29 +2,49 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.conf import settings
 from django.http import HttpResponse
+from .models import Student
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 # Create your views here.
-
 # This is a little complex because we need to detect when we are
 # running in various configurations
 
 
 class HomeView(View):
+    
+    template_name = "home/main.html"
+    
     def get(self, request):
-        print(request.get_host())
-        host = request.get_host()
-        islocal = host.find('localhost') >= 0 or host.find('127.0.0.1') >= 0
-        context = {
-            'installed': settings.INSTALLED_APPS,
-            'islocal': islocal
-        }
-        return render(request, 'home/main.html', context)
+        context = {}
 
-class StudentDashboardView(View):
+        if request.user.is_authenticated:
+            try:
+                student = Student.objects.get(user=request.user)
+                classes = student.courses.all()
+                context['classes'] = classes
+
+            except Student.DoesNotExist:
+                context['error'] = "Student profile not found."
+        print(context)
+        return render(request, self.template_name, context)
+
+class StudentDashboardView(LoginRequiredMixin, View):
+    template_name = 'home/student_dashboard.html'
+    
     def get(self, request):
-        # Render the student dashboard template on GET request
-        return render(request, 'home/student_dashboard.html')
+        context = {}
+
+        if request.user.is_authenticated:
+            try:
+                student = Student.objects.get(user=request.user)
+                classes = student.courses.all()
+                context['classes'] = classes
+
+            except Student.DoesNotExist:
+                context['error'] = "Student profile not found."
+
+        return render(request, self.template_name, context)
 
     def post(self, request):
         # Placeholder for handling the form submission

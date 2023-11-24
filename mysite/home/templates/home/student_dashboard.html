@@ -9,6 +9,7 @@
 <div class="container mt-5">
     <div class="jumbotron bg-light text-center text-primary">
         <h1 class="display-4 text-primary">Student Dashboard</h1>
+        <h1 class="display-4 text-secondary">Hello {{user}}</h1>
         <p class="lead">Submit your attendance code below.</p>
         <hr class="my-4"> <!-- Add horizontal rule like in the template -->
     </div>
@@ -20,12 +21,11 @@
                 <div class="form-group">
                     <label for="selectClass">Select Class:</label>
                     <select class="form-control" id="selectClass" name="selected_class">
-                        <option value="Designing and Using Databases" selected>Designing and Using Databases</option>
-                        <option value="Algorithms and Data Structures">Algorithms and Data Structures</option>
-                        <option value="Technology">Technology</option>
-                        <option value="Computer Programming 1">Computer Programming 1</option>
-                        <option value="Computer Programming 1">Computer Programming 1</option>
-                        <option value="Calculus for Computer Science">Calculus for Computer Science</option>
+                        {% for course in classes %}
+                            <option value="{{ course.id }}">{{ course.course_name }}</option>
+                        {% empty %}
+                            <option>No courses available</option>
+                        {% endfor %}
                     </select>
                 </div>
                 <div class="form-group">
