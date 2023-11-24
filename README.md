@@ -25,17 +25,6 @@ The Attendance Management System is a digital platform designed to enhance the m
 
 (Explain how to use the system once installed, possibly with examples or screenshots)
 
-## Contributing
-
-We welcome contributions to this project. Please refer to the `CONTRIBUTING.md` file for guidelines.
-
-## License
-
-(Include details about the license under which your project is released)
-
-## Contact
-
-For any queries or contributions, please contact [Project Maintainer/Your Name] at [Your Email].
 
 ## Acknowledgments
 
