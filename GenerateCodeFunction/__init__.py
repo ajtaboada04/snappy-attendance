@@ -12,12 +12,13 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
     # Save the code to Azure Table Storage
     table_service = TableService(connection_string=os.environ['AzureWebJobsStorage'])
-    table_name = 'TempCodes'  # Replace with your table name
+    table_name = 'TempCodes'  
     entity = Entity()
     entity.PartitionKey = 'Codes'
     entity.RowKey = six_digit_code
     entity.Timestamp = datetime.datetime.utcnow()
     table_service.insert_entity(table_name, entity)
 
-    # Return the generated code in the HTTP response
-    return func.HttpResponse(f"Generated Code: {six_digit_code}")
+    response_body = json.dumps({"code": six_digit_code})
+    
+    return func.HttpResponse(response_body, mimetype="application/json")

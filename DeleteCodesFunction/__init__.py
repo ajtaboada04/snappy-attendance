@@ -23,7 +23,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         if entities.items:
             # Iterate over entities and delete codes older than 30 seconds
             for entity in entities:
-                # Make the entity timestamp "offset-aware"
+                
                 code_timestamp_aware = entity.Timestamp.replace(tzinfo=datetime.timezone.utc)
 
                 time_difference = current_time - code_timestamp_aware
