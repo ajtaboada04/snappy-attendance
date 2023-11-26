@@ -2,9 +2,13 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.conf import settings
 from django.http import HttpResponse
-from .models import Student
+from .models import Student, Professor, Course, Session, Attendance
 from django.contrib.auth.mixins import LoginRequiredMixin
-
+from django.shortcuts import get_object_or_404
+from django.http import JsonResponse
+from django.utils import timezone
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 # This is a little complex because we need to detect when we are
@@ -19,6 +23,7 @@ class HomeView(View):
         context = {}
 
         if request.user.is_authenticated:
+            
             try:
                 student = Student.objects.get(user=request.user)
                 classes = student.courses.all()
@@ -26,7 +31,7 @@ class HomeView(View):
 
             except Student.DoesNotExist:
                 context['error'] = "Student profile not found."
-        print(context)
+                
         return render(request, self.template_name, context)
 
 class StudentDashboardView(LoginRequiredMixin, View):
@@ -36,14 +41,10 @@ class StudentDashboardView(LoginRequiredMixin, View):
         context = {}
 
         if request.user.is_authenticated:
-            try:
-                student = Student.objects.get(user=request.user)
-                classes = student.courses.all()
-                context['classes'] = classes
-
-            except Student.DoesNotExist:
-                context['error'] = "Student profile not found."
-
+            student = get_object_or_404(Student, user = request.user)
+            classes = student.courses.all()
+            context['classes'] = classes
+            context['student'] = student
         return render(request, self.template_name, context)
 
     def post(self, request):
@@ -51,9 +52,9 @@ class StudentDashboardView(LoginRequiredMixin, View):
         # Extract the class and code from POST data
         selected_class = request.POST.get('selected_class')
         attendance_code = request.POST.get('attendance_code')
-
-        # Here you would add logic to validate and record the attendance code submission
-        # For now, we'll just print it to the console and return a success message
+        
+        
+        
         print(f"Class: {selected_class}, Code: {attendance_code}")
 
         # You would redirect to a success page or render with a success message
@@ -61,26 +62,95 @@ class StudentDashboardView(LoginRequiredMixin, View):
 
         return render(request, 'home/confirmation.html', ctx)
 
-class ProfessorDashboardView(View):
+class ProfessorDashboardView(LoginRequiredMixin, View):
+    template_name = 'home/professor_dashboard.html'
     def get(self, request):
+        
         # Render the professor dashboard template on GET request
-        return render(request, 'home/professor_dashboard.html')
+        context = {}
+        if request.user.is_authenticated:
+            professor = get_object_or_404(Professor, user=request.user)
+            classes = professor.courses.all()
+            context["classes"] = classes
+            context["professor"] = professor
+        return render(request, self.template_name, context)
 
     def post(self, request):
-        # Save the selected class to the session
-        request.session['selected_class'] = request.POST.get('selected_class')
-        # Redirect to the DisplayCodesView
-        return redirect('display_codes')  # Assuming 'display_codes' is the name of the URL pattern for DisplayCodesView
+        selected_class_id = request.POST.get('selected_class')
+        try:
+            request.session['selected_class_id'] = selected_class_id
+        except Course.DoesNotExist:
+            request.session['error'] = "Class does not exist."
+        return redirect('display_codes')
 
 class DisplayCodesView(View):
+    template_name = 'home/attendance.html'
     def get(self, request):
-        selected_class = request.session.get('selected_class', 'Default Class')
+        context = {}
+        
+        selected_class_id = request.session.get('selected_class_id')
+        
+        selected_class = get_object_or_404(Course, id=selected_class_id)
+        students = Student.objects.filter(courses=selected_class)
+        
+        new_session = Session(course=selected_class)
+        new_session.save()
+        
+        context["selected_class"] = selected_class
+        context["students"] = students
+        
 
-        static_code = 'ABCD1234'
-        context = {
-            'selected_class': selected_class,
-            'attendance_code': static_code,
-        }
-        return render(request, 'home/attendance.html', context)
+        return render(request, self.template_name, context)
+    
     def post(self, request):
+        
         return redirect('display_codes')
+
+class GetAttendance(View):
+    def get(self, request):
+        data = {}
+        
+        class_id = request.GET.get('class_id')
+        selected_class = get_object_or_404(Course, id=class_id)
+        students = Student.objects.filter(courses=selected_class)
+
+        students_data = []
+        for student in students:
+            today = timezone.now().date()
+            attendance_record = Attendance.objects.filter(student=student, date=today).first()
+
+            status = attendance_record.status if attendance_record else 'unknown'
+            
+            students_data.append({
+                'id': student.id,
+                'name': student.name,
+                'status': status,
+            })
+
+        data['students'] = students_data
+
+        return JsonResponse(data)
+
+@method_decorator(login_required, name='dispatch')
+class SubmitAttendanceView(View):
+    def post(self, request):
+        # Process form data
+        # Example: request.POST.get('some_field')
+        class_id = request.session.get('selected_class_id')
+        selected_class = get_object_or_404(Course, id=class_id)
+
+        for student in Student.objects.filter(courses=selected_class):
+            status = request.POST.get(f'status_{student.id}')
+            date = timezone.now().date()
+            Attendance.objects.update_or_create(
+                student=student,
+                date=date,
+                defaults={'status': status}
+            )
+
+        # Redirect to main.html after processing
+        return redirect('home/main.html')  # Replace 'main' with the name of your URL pattern for main.html
+
+class SubmitCode(View):
+    def post(self, request):
+        return render(request, "home")

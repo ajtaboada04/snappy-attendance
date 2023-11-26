@@ -6,6 +6,8 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
 <link rel="stylesheet" href="{% static 'styles.css' %}">
 
+<input type="hidden" id="classId" value="{{ selected_class.id }}">
+
 <div class="container mt-5">
     <div class="jumbotron bg-light text-center">
         <h1 class="display-4 text-primary">{{ selected_class }}</h1>
@@ -14,45 +16,56 @@
         <hr class="my-4">
     </div>
 
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <table class="table mt-4">
-                <thead class="thead-light">
-                    <tr>
-                        <th>Student Name</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Jane Doe</td>
-                        <td>
-                            <select class="form-control status-select">
-                                <option value="present">Present</option>
-                                <option value="absent">Absent</option>
-                                <option value="late">Late</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>John Smith</td>
-                        <td>
-                            <select class="form-control status-select">
-                                <option value="present">Present</option>
-                                <option value="absent">Absent</option>
-                                <option value="late">Late</option>
-                            </select>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+    <!-- Start of Form -->
+    <form method="post" action="{% url 'submit_attendance' %}"> 
+        {% csrf_token %}
+        <input type="hidden" name="session_id" value="{{ current_session.id }}">
+
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <table class="table mt-4">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Student Name</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for student in students %}
+                        <tr>
+                            <td>{{ student.name }}</td> 
+                            <td>
+                                <input type="hidden" name="student_ids" value="{{ student.id }}">
+                                <select class="form-control status-select" id="status-{{ student.id }}" name="status_{{ student.id }}">
+                                    <option value="present">Present</option>
+                                    <option value="absent" selected>Absent</option>
+                                    <option value="late">Late</option>
+                                </select>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="2">No students enrolled in this class.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-8 text-center">
+                <button type="submit" class="btn btn-primary">Submit Attendance</button>
+            </div>
+        </div>
+    </form>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
 <script>
     document.getElementById('generateCode').addEventListener('click', function() {
@@ -64,6 +77,38 @@
         var randomCode = Math.random().toString(36).substr(2, 8).toUpperCase();
         document.getElementById('attendanceCode').textContent = randomCode;
     }, 30000);
+</script>
+
+<script>
+    $(document).ready(function() {
+        function updateStudentAttendance() {
+            var classId = $('#classId').val();
+
+            console.log("Attempting to update attendance status.");
+
+            $.ajax({
+                url: '{% url "update_attendance" %}',
+                type: 'GET',
+                data: { 'class_id': classId },
+                dataType: 'json',
+                success: function (response) {
+                    console.log("Response received:", response);
+                    if (response && Array.isArray(response.students)) {
+                        response.students.forEach(function(student) {
+                            $(`#status-${student.id}`).val(student.status); 
+                        });
+                    } else {
+                        console.log("Invalid or empty response:", response);
+                    }
+                },
+                error: function (error) {
+                    console.log("Error updating attendance: ", error);
+                }
+            });
+        }
+
+        setInterval(updateStudentAttendance, 30000);
+    });
 </script>
 
 {% endblock %}

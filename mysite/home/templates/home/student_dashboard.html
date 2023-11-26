@@ -8,15 +8,14 @@
 
 <div class="container mt-5">
     <div class="jumbotron bg-light text-center text-primary">
-        <h1 class="display-4 text-primary">Student Dashboard</h1>
-        <h1 class="display-4 text-secondary">Hello {{user}}</h1>
+        <h1 class="display-4 text-primary">Student <span class ="display-4 text-secondary" > {{student.name}}</span></h1>
         <p class="lead">Submit your attendance code below.</p>
         <hr class="my-4"> <!-- Add horizontal rule like in the template -->
     </div>
 
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <form action="#" method="post"> <!-- Action should point to your form handling view -->
+            <form action={% url 'home'%} method="post"> <!-- Action should point to your form handling view -->
             {% csrf_token %}
                 <div class="form-group">
                     <label for="selectClass">Select Class:</label>
