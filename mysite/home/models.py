@@ -30,13 +30,15 @@ class Student(models.Model):
 
     def __str__(self):
         return self.name
+    
 class Attendance(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     date = models.DateField(default=datetime.date.today)
-    status = models.CharField(max_length=10, choices=[('present', 'Present'), ('late', 'Late'), ('absent', 'Absent')])
+    status = models.CharField(max_length=10, choices=[('present', 'Present'), ('late', 'Late'), ('absent', 'Absent')], default='absent')
 
     def __str__(self):
         return f"{self.student.name} - {self.date} - {self.status}"
+    
 class Session(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     attendance_records = models.ManyToManyField(Attendance, related_name='sessions')

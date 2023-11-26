@@ -24,8 +24,10 @@
         {% if user.is_authenticated %}
 
         <h1>Welcome back: <span style = font-color: "gray">{{user}}</span>!</h1>
-
+        <a href="{% url 'logout' %}?next={% url 'home' %}">Logout</a>
+        
         {% else %}
+        
         
         <a class="btn btn-outline-primary btn-lg" href="{% url 'login' %}?next={% url 'home' %}" role="button">Login</a>
 

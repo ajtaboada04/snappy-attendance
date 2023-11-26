@@ -8,7 +8,7 @@
 
 <div class="container mt-5">
     <div class="jumbotron bg-light text-center">
-        <h1 class="display-4 text-primary">Professor Dashboard</h1>
+        <h1 class="display-4 text-primary">Professor <span class ="display-4 text-secondary" > {{professor.name}}</span></h1>
         <p class="lead">Select a class to manage attendance codes.</p>
         <hr class="my-4">
     </div>
@@ -20,9 +20,11 @@
                 <div class="form-group">
                     <label for="selectClass">Select Class:</label>
                     <select class="form-control" id="selectClass" name="selected_class">
-                        <!-- Options that match the provided class names -->
-                        <option value="Designing and Using Databases">Designing and Using Databases</option>
-                        <option value="Cloud Computing">Cloud Computing</option>
+                        {% for course in classes %}
+                            <option value="{{ course.id }}">{{ course.course_name }}</option>
+                        {% empty %}
+                            <option>No courses available</option>
+                        {% endfor %}
                     </select>
                 </div>
                 <button type="submit" class="btn btn-primary">Display Codes</button>
