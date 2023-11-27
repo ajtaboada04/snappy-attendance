@@ -5,7 +5,15 @@ import datetime
 
 # Create your models here.
 
-from django.contrib.auth.models import User
+class SessionManager(models.Manager):
+    def create_new_session(self, course, date):
+        # Calculate the next session number
+        last_session = Session.objects.filter(course=course).order_by('session_number').last()
+        next_session_number = last_session.session_number + 1 if last_session else 1
+
+        # Create the new session
+        session = self.create(course=course, date=date, session_number=next_session_number)
+        return session
 
 class Course(models.Model):
     course_name = models.CharField(max_length=255, validators=[MinLengthValidator(2, "Course name must be greater than 2 characters")])
@@ -41,14 +49,17 @@ class Attendance(models.Model):
     
 class Session(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    session_number = models.IntegerField(default=1)
     attendance_records = models.ManyToManyField(Attendance, related_name='sessions')
+    date = models.DateField(default=datetime.date.today)
+    
+    objects = SessionManager()
 
     def __str__(self):
-        return f"Session for {self.course.course_name}"
+        string_parts = [f"Session: {self.date} - {self.course.course_name}"]
 
-class Class(models.Model):
-    course = models.ForeignKey(Course, on_delete=models.CASCADE)
-    attendance_records = models.ManyToManyField(Attendance, related_name='classes')
+        # Iterate over related attendance records
+        for record in self.attendance_records.all():
+            string_parts.append(f"{record.student.name} - {record.date} - {record.status}")
 
-    def __str__(self):
-        return f"Class of {self.course.course_name}"
+        return '\n'.join(string_parts)

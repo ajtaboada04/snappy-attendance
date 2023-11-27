@@ -20,6 +20,7 @@
     <form method="post" action="{% url 'submit_attendance' %}"> 
         {% csrf_token %}
         <input type="hidden" name="session_id" value="{{ current_session.id }}">
+        <input type="hidden" name="session_number" value="{{ current_session.session_number }}">
 
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -68,47 +69,74 @@
 
 
 <script>
-    document.getElementById('generateCode').addEventListener('click', function() {
-        var randomCode = Math.random().toString(36).substr(2, 8).toUpperCase();
-        document.getElementById('attendanceCode').textContent = randomCode;
-    });
-
-    setInterval(function() {
-        var randomCode = Math.random().toString(36).substr(2, 8).toUpperCase();
-        document.getElementById('attendanceCode').textContent = randomCode;
-    }, 30000);
-</script>
-
-<script>
     $(document).ready(function() {
+        // Function to delete old codes from Azure Table Storage
+        function deleteOldCodes() {
+            $.ajax({
+                url: 'https://tempcodes.azurewebsites.net/api/DeleteCodesFunction?code=bjDNB3x9NRcJtChu5YvEuSOT__c3jdmRnKhDmoIDwjX2AzFuXYyQbw==',
+                type: 'GET',
+                success: function(response, statusText, xhr) {
+                    console.log('Old codes deleted, status:', xhr.status);
+                },
+                error: function(error) {
+                    console.log('Error deleting old codes:', error);
+                }
+            });
+        }
+
+        // Function to update the attendance code from Azure Function
+        function updateAttendanceCode() {
+            deleteOldCodes(); // Delete old codes before updating the new code
+
+            $.ajax({
+                url: 'https://tempcodes.azurewebsites.net/api/GenerateCodeFunction?code=74pbScwXMtLf6JDxQy6s8MpIEHTHXke6q-7mP5BX-JkIAzFumSyvkQ==',
+                type: 'GET',
+                success: function(response) {
+                    console.log('New code fetched:', response.code);
+                    $('#attendanceCode').text(response.code);
+                },
+                error: function(error) {
+                    console.log('Error fetching new code:', error);
+                }
+            });
+        }
+
+        // Function to update student attendance from Django backend
         function updateStudentAttendance() {
             var classId = $('#classId').val();
-
+            var sessionNumber = $('#session_number').val()
             console.log("Attempting to update attendance status.");
 
             $.ajax({
                 url: '{% url "update_attendance" %}',
                 type: 'GET',
-                data: { 'class_id': classId },
+                data: { 'class_id': classId, 'session_number': sessionNumber },
                 dataType: 'json',
-                success: function (response) {
-                    console.log("Response received:", response);
+                success: function(response) {
+                    console.log("Attendance status updated:", response);
                     if (response && Array.isArray(response.students)) {
                         response.students.forEach(function(student) {
-                            $(`#status-${student.id}`).val(student.status); 
+                            $(`#status-${student.id}`).val(student.status);
                         });
                     } else {
                         console.log("Invalid or empty response:", response);
                     }
                 },
-                error: function (error) {
-                    console.log("Error updating attendance: ", error);
+                error: function(error) {
+                    console.log("Error updating attendance:", error);
                 }
             });
         }
 
-        setInterval(updateStudentAttendance, 30000);
+        // Schedule the functions
+        setInterval(updateAttendanceCode, 30000); // Update code every 30 seconds
+        setInterval(updateStudentAttendance, 10000); // Update student attendance every 10 seconds
+
+        // Initial calls
+        updateAttendanceCode();
+        updateStudentAttendance();
     });
 </script>
+
 
 {% endblock %}
