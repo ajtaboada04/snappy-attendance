@@ -13,6 +13,10 @@
   color: #007bff;
 }
 
+.text-secondary {
+  color: #808080;
+}
+
 .card {
   border: 1px solid #007bff;
 }

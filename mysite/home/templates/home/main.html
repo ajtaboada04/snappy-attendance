@@ -18,9 +18,25 @@
         <p class="lead">Precision and security in tracking attendance.</p>
         <hr class="my-4">
         <p>Efficiently manage classes and attendance records through your account.</p>
-        <a class="btn btn-outline-primary btn-lg" href="#" role="button" disabled>Login</a> <!-- Changed to 'a' tags for future linking -->
-        <a class="btn btn-outline-primary btn-lg" href="#" role="button" disabled>Register</a>
+
+        {% block login %}
+
+        {% if user.is_authenticated %}
+
+        <h1>Welcome back: <span style = font-color: "gray">{{user}}</span>!</h1>
+        <a href="{% url 'logout' %}?next={% url 'home' %}">Logout</a>
+        
+        {% else %}
+        
+        
+        <a class="btn btn-outline-primary btn-lg" href="{% url 'login' %}?next={% url 'home' %}" role="button">Login</a>
+
+        {% endif %}
+
+        {% endblock %}
     </div>
+
+    {%block dashboards%}
 
     <div class="row text-center">
         <div class="col-md-6 mb-4">
@@ -46,6 +62,7 @@
         </div>
     </div>
 </div>
+{% endblock %}
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>

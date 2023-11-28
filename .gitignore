@@ -6,3 +6,4 @@ django_env
 azure_env
 .python_packages
 .venv
+venv
