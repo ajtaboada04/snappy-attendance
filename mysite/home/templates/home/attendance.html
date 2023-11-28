@@ -1,69 +1,24 @@
-{% load static %}
-
 {% block content %}
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
-<link rel="stylesheet" href="{% static 'styles.css' %}">
 
 <input type="hidden" id="classId" value="{{ selected_class.id }}">
+<input type="hidden" id="classId" value="{{ current_session.session_number }}">
+
 
 <div class="container mt-5">
     <div class="jumbotron bg-light text-center">
         <h1 class="display-4 text-primary">{{ selected_class }}</h1>
         <p class="lead">Manage attendance for your class. Attendance Code: <span id="attendanceCode">ABCD1234</span></p>
         <button class="btn btn-info" id="generateCode">Generate New Code</button>
+        <a href="{% url 'attendance_management' %}" class="btn btn-secondary">Check Attendance</a>
         <hr class="my-4">
     </div>
-
-    <!-- Start of Form -->
-    <form method="post" action="{% url 'submit_attendance' %}"> 
-        {% csrf_token %}
-        <input type="hidden" name="session_id" value="{{ current_session.id }}">
-        <input type="hidden" name="session_number" value="{{ current_session.session_number }}">
-
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <table class="table mt-4">
-                    <thead class="thead-light">
-                        <tr>
-                            <th>Student Name</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for student in students %}
-                        <tr>
-                            <td>{{ student.name }}</td> 
-                            <td>
-                                <input type="hidden" name="student_ids" value="{{ student.id }}">
-                                <select class="form-control status-select" id="status-{{ student.id }}" name="status_{{ student.id }}">
-                                    <option value="present">Present</option>
-                                    <option value="absent" selected>Absent</option>
-                                    <option value="late">Late</option>
-                                </select>
-                            </td>
-                        </tr>
-                        {% empty %}
-                        <tr>
-                            <td colspan="2">No students enrolled in this class.</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <div class="row justify-content-center">
-            <div class="col-md-8 text-center">
-                <button type="submit" class="btn btn-primary">Submit Attendance</button>
-            </div>
-        </div>
-    </form>
 </div>
-
+{% endblock %}
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -101,42 +56,10 @@
             });
         }
 
-        // Function to update student attendance from Django backend
-        function updateStudentAttendance() {
-            var classId = $('#classId').val();
-            var sessionNumber = $('#session_number').val()
-            console.log("Attempting to update attendance status.");
-
-            $.ajax({
-                url: '{% url "update_attendance" %}',
-                type: 'GET',
-                data: { 'class_id': classId, 'session_number': sessionNumber },
-                dataType: 'json',
-                success: function(response) {
-                    console.log("Attendance status updated:", response);
-                    if (response && Array.isArray(response.students)) {
-                        response.students.forEach(function(student) {
-                            $(`#status-${student.id}`).val(student.status);
-                        });
-                    } else {
-                        console.log("Invalid or empty response:", response);
-                    }
-                },
-                error: function(error) {
-                    console.log("Error updating attendance:", error);
-                }
-            });
-        }
-
         // Schedule the functions
         setInterval(updateAttendanceCode, 30000); // Update code every 30 seconds
-        setInterval(updateStudentAttendance, 10000); // Update student attendance every 10 seconds
 
         // Initial calls
         updateAttendanceCode();
-        updateStudentAttendance();
     });
 </script>
-
-
-{% endblock %}

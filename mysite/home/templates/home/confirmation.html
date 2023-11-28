@@ -15,9 +15,12 @@
                 <div class="alert alert-success" role="alert">
                     <h4 class="alert-heading">Successfully Submitted!</h4>
                     <p>Class: {{class}}</p>
-                    <p>Code: {{code}}</p>
                     <hr>
+                    {%if is_professor %}
+                    <p class="mb-0">Class attendance was submitted correctly.</p>
+                    {% else %}
                     <p class="mb-0">Your attendance code has been submitted successfully.</p>
+                    {% endif %}
                 </div>
                 <a href="{% url 'home' %}" class="btn btn-primary">Home</a>
             </div>
