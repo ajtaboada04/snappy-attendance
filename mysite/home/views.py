@@ -40,7 +40,6 @@ class StudentDashboardView(LoginRequiredMixin, View):
     
     def get(self, request):
         context = {}
-
         if request.user.is_authenticated:
             student = get_object_or_404(Student, user = request.user)
             classes = student.courses.all()
@@ -52,6 +51,7 @@ class StudentDashboardView(LoginRequiredMixin, View):
         student = get_object_or_404(Student, user=request.user)
         selected_class_id = request.POST.get('selected_class')
         attendance_code = request.POST.get('attendance_code')
+        request.session["selected_class_id"] = selected_class_id
 
         # Get the course using the selected_class_id
         course = get_object_or_404(Course, id=selected_class_id)
@@ -147,6 +147,7 @@ class ConfirmationView(LoginRequiredMixin, View):
     def get(self, request):
         context = {}
         class_id = request.session.get('selected_class_id')
+        print(class_id)
         course = get_object_or_404(Course, id=class_id)
         context["class"] = course.course_name
         context["is_professor"] = False
