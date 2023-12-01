@@ -1,0 +1,75 @@
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+<link rel="stylesheet" href="{% static 'styles.css' %}">
+
+<div class="container mt-5">
+    <div class="jumbotron bg-light text-center text-primary">
+        <h1 class="display-4 text-primary">Student <span class ="display-4 text-secondary">{{ student.name }}</span></h1>
+        <p class="lead">Submit your attendance code below.</p>
+        <hr class="my-4">
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form action="{% url 'student_dashboard' %}" method="post">
+            {% csrf_token %}
+                <div class="form-group">
+                    <label for="selectClass">Select Class:</label>
+                    <select class="form-control" id="selectClass" name="selected_class">
+                        {% for course in classes %}
+                            <option value="{{ course.id }}">{{ course.course_name }}</option>
+                        {% empty %}
+                            <option>No courses available</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="inputCode">Attendance Code:</label>
+                    <input type="text" class="form-control" id="inputCode" name="attendance_code" placeholder="Enter code">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for Invalid Code -->
+<div class="modal fade" id="invalidCodeModal" tabindex="-1" role="dialog" aria-labelledby="invalidCodeModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="invalidCodeModalLabel">Invalid Code</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                The code you entered is not valid. Please try again.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+{% if invalid_code %}
+<script>
+    $(document).ready(function() {
+        // Show the modal if the code is invalid
+        $('#invalidCodeModal').modal('show');
+    });
+</script>
+{% endif %}
+
+
