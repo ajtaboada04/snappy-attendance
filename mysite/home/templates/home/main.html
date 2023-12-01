@@ -8,7 +8,6 @@
     <title>{{ settings.APP_NAME }}</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
-    <link rel="stylesheet" href="{% static 'your_app/styles.css' %}">
 </head>
 <body>
 
@@ -25,6 +24,16 @@
 
         <h1>Welcome back: <span style = font-color: "gray">{{user}}</span>!</h1>
         <a href="{% url 'logout' %}?next={% url 'home' %}">Logout</a>
+
+        <div class="row text-center mt-4">
+            <div class="col">
+                {% if role == 'professor' %}
+                    <a href="{% url 'professor_attendance' %}" class="btn btn-success">Manage Attendance</a>
+                {% elif role == 'student' %}
+                    <a href="{% url 'student_attendance' %}" class="btn btn-success">View Attendance</a>
+                {% endif %}
+            </div>
+        </div>
         
         {% else %}
         
@@ -36,37 +45,72 @@
         {% endblock %}
     </div>
 
-    {%block dashboards%}
+    {% block dashboards %}
 
-    <div class="row text-center">
-        <div class="col-md-6 mb-4">
-            <div class="card border-primary">
-                <div class="card-body">
-                    <i class="fas fa-chalkboard-teacher fa-3x mb-3"></i>
-                    <h5 class="card-title">For Professors</h5>
-                    <p class="card-text">Organize classes and oversee attendance with ease.</p>
-                    <a class="btn btn-outline-primary" href="{% url 'professor_dashboard' %}" role="button" disabled>Professor Dashboard</a>
-                </div>
+<div class="row text-center">
+    <div class="col-md-6 mb-4">
+        <div class="card border-primary">
+            <div class="card-body">
+                <i class="fas fa-chalkboard-teacher fa-3x mb-3"></i>
+                <h5 class="card-title">For Professors</h5>
+                <p class="card-text">Organize classes and oversee attendance with ease.</p>
+                <button onclick="checkAccess('professor')" class="btn btn-outline-primary" role="button">Professor Dashboard</button>
             </div>
         </div>
+    </div>
 
-        <div class="col-md-6 mb-4">
-            <div class="card border-primary">
-                <div class="card-body">
-                    <i class="fas fa-user-graduate fa-3x mb-3"></i>
-                    <h5 class="card-title">For Students</h5>
-                    <p class="card-text">Track your attendance and keep your profile up to date effortlessly.</p>
-                   <a class="btn btn-outline-primary" href="{% url 'student_dashboard' %}" role="button">Student Dashboard</a>
-                </div>
+    <div class="col-md-6 mb-4">
+        <div class="card border-primary">
+            <div class="card-body">
+                <i class="fas fa-user-graduate fa-3x mb-3"></i>
+                <h5 class="card-title">For Students</h5>
+                <p class="card-text">Track your attendance and keep your profile up to date effortlessly.</p>
+                <button onclick="checkAccess('student')" class="btn btn-outline-primary" role="button">Student Dashboard</button>
             </div>
         </div>
     </div>
 </div>
+
 {% endblock %}
+
+<div class="modal" tabindex="-1" role="dialog" id="accessDeniedModal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Access Denied</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>You do not have access to this dashboard.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<script>
+    var userRole = "{{ role }}";
+
+    function checkAccess(requiredRole) {
+        if (userRole !== requiredRole) {
+            // Show access denied modal
+            $('#accessDeniedModal').modal('show');
+        } else {
+            // Redirect to the appropriate dashboard
+            window.location.href = requiredRole === 'professor' ? '{% url 'professor_dashboard' %}' : '{% url 'student_dashboard' %}';
+        }
+    }
+
+</script>
 </body>
 </html>
 
