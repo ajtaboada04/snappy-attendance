@@ -15,10 +15,6 @@ The Attendance Management System is a digital platform designed to enhance the m
 - **Dynamic Verification Code**: Uses a serverless function to generate a new verification code every 30 seconds for enhanced security.
 - **Time Tracking**: Marks students late based on their entry time into the classroom.
 
-## Installation
-
-
-(Provide detailed steps to install the project here)
 
 ## Usage
 ![Screenshot 2023-11-24 190238](https://github.com/rorosaga/Classlink/assets/133862511/78c5d444-b436-4d1d-84d7-4e12392e7bf0)
