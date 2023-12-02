@@ -18,7 +18,7 @@ The Attendance Management System is a digital platform designed to enhance the m
 
 ## How to Navigate the System:
 
-###Initial Screen
+##Initial Screen
 <img width="1152" alt="Screenshot 2023-12-02 at 16 15 34" src="https://github.com/rorosaga/Classlink/assets/133862511/3bca3278-c29c-4db1-a6d7-6e28927dddf3">
 <img width="1152" alt="Screenshot 2023-12-02 at 16 17 36" src="https://github.com/rorosaga/Classlink/assets/133862511/cf78ce40-ed1a-4428-a3db-22409f4a3a2d">
 <img width="1146" alt="Screenshot 2023-12-02 at 16 17 42" src="https://github.com/rorosaga/Classlink/assets/133862511/17f73cb4-52ae-4657-8bc9-028114d9ad8f">
