@@ -18,32 +18,29 @@ The Attendance Management System is a digital platform designed to enhance the m
 ## How to Navigate the System:
 
 <!-- Image on the left, text on the right -->
-<p align="center">
+<p align="left">
   <img src="https://github.com/rorosaga/Classlink/assets/133862511/c1df9948-70c9-40b8-94c6-7c1f530f7c0e" alt="Screenshot" width="50%">
   <span>Your Text Here</span>
 </p>
 
 <!-- Text on the left, image on the right -->
-<p align="center">
+<p align="right">
   <span>Your Text Here</span>
   <img src="https://github.com/rorosaga/Classlink/assets/133862511/32d44463-d570-47f1-98fe-ea10bf551c22" alt="Screenshot" width="50%">
 </p>
 
 <!-- Image on the left, text on the right -->
-<p align="center">
+<p align="left">
   <img src="https://github.com/rorosaga/Classlink/assets/133862511/ce815f88-0b4a-4739-a686-0a952c86e816" alt="Screenshot" width="50%">
   <span>Your Text Here</span>
 </p>
 
 <!-- Text on the left, image on the right -->
-<p align="center">
+<p align="right">
   <span>Your Text Here</span>
   <img src="https://github.com/rorosaga/Classlink/assets/133862511/dec8a74f-8e33-43e4-9cbc-5239556ef250" alt="Screenshot" width="50%">
 </p>
 
-<!-- Continue this pattern for other images -->
-
-<!-- Repeat the above blocks for each image-text pair -->
 
 ## Acknowledgments
 
