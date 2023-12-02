@@ -20,34 +20,19 @@ The Attendance Management System is a digital platform designed to enhance the m
 
 ## Initial Screen
 
-<div style="display: flex; flex-wrap: wrap;">
+<!-- Image on the left, text on the right -->
+<p align="center">
+  <img src="https://github.com/rorosaga/Classlink/assets/133862511/c1df9948-70c9-40b8-94c6-7c1f530f7c0e" alt="Screenshot" width="50%">
+  <span>Your Text Here</span>
+</p>
 
-  <div style="flex: 1; order: 1; margin-right: 20px;">
-    <img width="300" src="https://github.com/rorosaga/Classlink/assets/133862511/a27df24d-9a92-48e0-8741-83d14f4a9fbc" alt="Image 1">
-  </div>
+<!-- Text on the left, image on the right -->
+<p align="center">
+  <span>Your Text Here</span>
+  <img src="https://github.com/rorosaga/Classlink/assets/133862511/32d44463-d570-47f1-98fe-ea10bf551c22" alt="Screenshot" width="50%">
+</p>
 
-  <div style="flex: 1; order: 2;">
-    <!-- Your code goes here -->
-    ```python
-    print("Hello, World!")
-    ```
-  </div>
-
-  <div style="flex: 1; order: 3; margin-right: 20px;">
-    <img width="300" alt="Image 2" src="https://github.com/rorosaga/Classlink/assets/133862511/3bca3278-c29c-4db1-a6d7-6e28927dddf3">
-  </div>
-
-  <div style="flex: 1; order: 4;">
-    <!-- Your code goes here -->
-    ```python
-    print("Another code example")
-    ```
-  </div>
-
-  <!-- Continue this pattern for additional images and code blocks -->
-
-</div>
-
+<!-- Continue this pattern for other images and text -->
 
 
 
