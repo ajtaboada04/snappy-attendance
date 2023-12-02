@@ -19,26 +19,35 @@ The Attendance Management System is a digital platform designed to enhance the m
 ## How to Navigate the System:
 
 ## Initial Screen
-<div>
-  <img width="300" src="https://github.com/rorosaga/Classlink/assets/133862511/a27df24d-9a92-48e0-8741-83d14f4a9fbc" alt="Your Image">
-  <div style="float: left; margin-left: 20px;">
-  
-  <!-- Your code goes here -->
-  
-  ```python
-  print("Hello, World!")
 
-<img width="1152" alt="Screenshot 2023-12-02 at 16 15 34" src="https://github.com/rorosaga/Classlink/assets/133862511/3bca3278-c29c-4db1-a6d7-6e28927dddf3">
-<img width="1152" alt="Screenshot 2023-12-02 at 16 17 36" src="https://github.com/rorosaga/Classlink/assets/133862511/cf78ce40-ed1a-4428-a3db-22409f4a3a2d">
-<img width="1146" alt="Screenshot 2023-12-02 at 16 17 42" src="https://github.com/rorosaga/Classlink/assets/133862511/17f73cb4-52ae-4657-8bc9-028114d9ad8f">
-<img width="1147" alt="Screenshot 2023-12-02 at 16 17 55" src="https://github.com/rorosaga/Classlink/assets/133862511/81625926-6d20-4f01-b6b5-5c9f22052024">
-<img width="1109" alt="Screenshot 2023-12-02 at 16 18 09" src="https://github.com/rorosaga/Classlink/assets/133862511/f6b55581-0c18-4140-b630-17b3f5f8a7c1">
-<img width="1158" alt="Screenshot 2023-12-02 at 16 18 13" src="https://github.com/rorosaga/Classlink/assets/133862511/b561b5a2-fd3c-41ba-ba95-630514068223">
-<img width="1140" alt="Screenshot 2023-12-02 at 16 18 18" src="https://github.com/rorosaga/Classlink/assets/133862511/64a67dd7-5d94-4cee-9a74-727e7de04a62">
-<img width="1151" alt="Screenshot 2023-12-02 at 16 18 27" src="https://github.com/rorosaga/Classlink/assets/133862511/46e846a2-79aa-46fb-9ff7-bd29d5c74eea">
-<img width="1056" alt="Screenshot 2023-12-02 at 16 18 38" src="https://github.com/rorosaga/Classlink/assets/133862511/41bda402-bfe7-4233-81e1-182b90f81aaf">
-<img width="1228" alt="Screenshot 2023-12-02 at 16 15 09" src="https://github.com/rorosaga/Classlink/assets/133862511/95518a91-c386-4c65-b723-1a501f3dfacd">
-<img width="1078" alt="Screenshot 2023-12-02 at 16 15 20" src="https://github.com/rorosaga/Classlink/assets/133862511/0c848caa-ba66-43f1-bda0-d7172cced1ac">
+<div style="display: flex; flex-wrap: wrap;">
+
+  <div style="flex: 1; order: 1; margin-right: 20px;">
+    <img width="300" src="https://github.com/rorosaga/Classlink/assets/133862511/a27df24d-9a92-48e0-8741-83d14f4a9fbc" alt="Image 1">
+  </div>
+
+  <div style="flex: 1; order: 2;">
+    <!-- Your code goes here -->
+    ```python
+    print("Hello, World!")
+    ```
+  </div>
+
+  <div style="flex: 1; order: 3; margin-right: 20px;">
+    <img width="300" alt="Image 2" src="https://github.com/rorosaga/Classlink/assets/133862511/3bca3278-c29c-4db1-a6d7-6e28927dddf3">
+  </div>
+
+  <div style="flex: 1; order: 4;">
+    <!-- Your code goes here -->
+    ```python
+    print("Another code example")
+    ```
+  </div>
+
+  <!-- Continue this pattern for additional images and code blocks -->
+
+</div>
+
 
 
 
