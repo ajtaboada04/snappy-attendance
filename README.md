@@ -32,7 +32,7 @@ The Attendance Management System is a digital platform designed to enhance the m
 <!-- Text on the left, image on the right -->
 <table>
   <tr>
-    <td valign="middle">Your Text Here</td>
+    <td valign="right">Your Text Here</td>
     <td><img src="https://github.com/rorosaga/Classlink/assets/133862511/32d44463-d570-47f1-98fe-ea10bf551c22" alt="Screenshot" width="50%"></td>
   </tr>
   <tr><td colspan="2">&nbsp;</td></tr> <!-- Spacer row -->
