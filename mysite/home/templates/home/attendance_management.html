@@ -26,7 +26,7 @@
                         <tr>
                             <td>{{ record.name }}</td> 
                             <td>
-                                <select class="form-control status-select" name="status_{{ record.student.id }}">
+                                <select class="form-control status-select" name="status_{{ record.id }}">
                                     <option value="present" {% if record.status == 'present' %}selected{% endif %}>Present</option>
                                     <option value="absent" {% if record.status == 'absent' %}selected{% endif %}>Absent</option>
                                     <option value="late" {% if record.status == 'late' %}selected{% endif %}>Late</option>

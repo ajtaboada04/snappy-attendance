@@ -427,9 +427,11 @@ def call_azure_function(request):
     )
     # If the response is 200, return the JSON response
     if response.status_code == 200:
+        print(response.json())
         return JsonResponse(response.json())
     else:
     # Else return an error
+        print('error')
         return JsonResponse({'error': 'Failed to fetch data from Azure Function'}, status=500)
 
 # call_delete_function: view that calls the Azure Function that
