@@ -26,55 +26,56 @@ The Attendance Management System is a digital platform designed to enhance the m
 
 <br><br>
 <h2 align="left">Homescreen</h2>
-
+<br>
 <p align="center">
   
   <img width="75%" alt="Screenshot 13" src="https://github.com/rorosaga/Classlink/assets/133862511/5ce32413-2d12-4286-9a96-16ba8a793548">
-  <br>Snappy's attendance system front end welcome page. Symplistic although efficient.
+  <br><br>Snappy's homescreen presents itself as symplistic although efficient. It displays three possible paths: Login, Professor Dashboard and Student Dashboard. The user then logs in and starts the systems navigation.
 </p>
 
 <br><br>
 ## Professor's Navigation through the System
+<br>
 <p align="center">
   <img width="75%" alt="Screenshot 6" src="https://github.com/rorosaga/Classlink/assets/133862511/45c551ac-62e8-4e27-9b61-e02aa260ae42">
-  <br>Text for Image 6
+  <br><br>When the professor logs in the following screen is presented, displaying a successfull login and the name of the user.
 </p>
 
+<br><br>
 <p align="center">
   <img width="75%" alt="Screenshot 7" src="https://github.com/rorosaga/Classlink/assets/133862511/c540859e-273c-4c79-866e-7414d636fe7d">
-  <br>Text for Image 7
+  <br><br>The professor has the possibility to check the attendance status of a student for any specific session of the term.
+  <br><br>
 </p>
 
 <p align="center">
   <img width="75%" alt="Screenshot 8" src="https://github.com/rorosaga/Classlink/assets/133862511/222e27c1-7217-478e-a6f5-04f34efecbcc">
-  <br>Text for Image 8
+  <br><br>Once the query is sent, snappy will present the following page displaying the Name and Surname of the student, and the status of the attendance for the specific session. In this case Rodrigo in session 1 was in fact present.
+  <br><br>
 </p>
 
 <p align="center">
   <img width="75%" alt="Screenshot 9" src="https://github.com/rorosaga/Classlink/assets/133862511/f9c52dd1-f500-47c6-88af-850f991390a8">
-  <br>Text for Image 9
+  <br><br>It is not uncommon for a professor to be teaching more than one class throughout the semester, therefore in the case of Edoardo, the professor will select the class he is teaching and start the attendance process by pressing the button "Display Code"<br><br>
 </p>
 
 <p align="center">
   <img width="75%" alt="Screenshot 10" src="https://github.com/rorosaga/Classlink/assets/133862511/88d232f7-7bba-4381-9892-27f7aa0ed987">
-  <br>Text for Image 10
+  <br><br><br>The following page will show displaying the code necessary for the students to complete the attendance process
+  <br><br>
 </p>
 
 <p align="center">
   <img width="75%" alt="Screenshot 11" src="https://github.com/rorosaga/Classlink/assets/133862511/d823b01f-2c69-46fb-beac-e2f0ecb6d525">
-  <br>Text for Image 11
+  <br><br><br>In the case of 'orange status' students, the professor has the possibility to change manually the attendance. This would also be useful in the case in which a student has attended a seminar/presentation with IE which excuses the absences of a student.<br><br>
 </p>
 
 <p align="center">
   <img width="75%" alt="Screenshot 12" src="https://github.com/rorosaga/Classlink/assets/133862511/f4d38308-5c13-4f8a-b088-24ace9e4e351">
-  <br>Text for Image 12
+  <br><br><br>Once all the students have inserted the code displayed, the professor can officially submit the attendance record of the session.
+  <br><br>
 </p>
 
-
-<p align="center">
-  <img width="75%" alt="Screenshot 14" src="https://github.com/rorosaga/Classlink/assets/133862511/78d529b8-9589-47df-857b-b94f6cdab">
-  <br>Text for Image 12
-</p>
 
 
 <br><br>
