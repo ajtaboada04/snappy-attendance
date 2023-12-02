@@ -5,9 +5,14 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils import timezone
 from django.contrib import messages
 from django.db.models import Max
+from django.http import JsonResponse
+from django.conf import settings
+
 
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render, redirect
+
+
 
 from .models import Student, Professor, Course, Session, Attendance
 
@@ -86,7 +91,8 @@ class StudentDashboardView(LoginRequiredMixin, View):
         request.session["selected_class_id"] = selected_class_id
 
         # URL of your Azure Function (taken from the environment)
-        azure_function_url = 'https://tempcodes.azurewebsites.net/api/ValidateCodeFunction?code=4EcQ_77UF2j1CKwIzbYWR1TNhO8KutT81eQahrrJLQvUAzFuIX0j8A=='
+        
+        azure_function_url = f"{settings.VALIDATE_CODE_FUNC}?code={settings.VALIDATE_CODE_KEY}"
         
         # Logic to compare the code given with code in Azure table
         try:
@@ -405,3 +411,39 @@ class ProfessorAttendanceView(LoginRequiredMixin, View):
 
         # Render the template with the given context
         return render(request, self.template_name, context)
+    
+# The following views are used to call the Azure Functions
+# from the frontend. This is done to avoid exposing the
+# API keys on the client side.
+
+# call_azure_function: view that calls the Azure Function that
+# generates the attendance codes
+def call_azure_function(request):
+    
+    # Send a GET request to the Azure Function
+    response = requests.get(
+        settings.GENERATE_CODE_FUNC ,
+        params={'code': settings.GENERATE_CODE_KEY}
+    )
+    # If the response is 200, return the JSON response
+    if response.status_code == 200:
+        return JsonResponse(response.json())
+    else:
+    # Else return an error
+        return JsonResponse({'error': 'Failed to fetch data from Azure Function'}, status=500)
+
+# call_delete_function: view that calls the Azure Function that
+# deletes the attendance codes in the Azure Table
+def call_delete_function(request):
+    
+    # Send a GET request to the Azure Function
+    response = requests.get(
+        settings.DELETE_CODE_FUNC ,
+        params={'code': settings.DELETE_CODE_KEY}
+    )
+    # If the response is 200, return the JSON response (successful deletion)
+    if response.status_code == 200:
+        return JsonResponse(response.json())
+    else:
+    # Else return an error
+        return JsonResponse({'error': 'Failed to fetch data from Azure Function'}, status=500)

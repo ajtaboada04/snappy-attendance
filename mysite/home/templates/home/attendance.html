@@ -10,9 +10,9 @@
 <div class="container mt-5">
     <div class="jumbotron bg-light text-center">
         <h1 class="display-4 text-primary">{{ selected_class }}</h1>
-        <p class="lead">Manage attendance for your class. Attendance Code: <span id="attendanceCode">ABCD1234</span></p>
-        <button class="btn btn-info" id="generateCode">Generate New Code</button>
-        <a href="{% url 'attendance_management' %}" class="btn btn-secondary">Check Attendance</a>
+        <p class="lead">Manage attendance for your class. Attendance Code:</p>
+        <h2 class="display-3 text-secondary"><span id="attendanceCode"></span></h2>
+        <a href="{% url 'attendance_management' %}" class="btn btn-info">Check Attendance</a>
         <hr class="my-4">
     </div>
 </div>
@@ -28,7 +28,7 @@
         // Function to delete old codes from Azure Table Storage
         function deleteOldCodes() {
             $.ajax({
-                url: 'https://tempcodes.azurewebsites.net/api/DeleteCodesFunction?code=bjDNB3x9NRcJtChu5YvEuSOT__c3jdmRnKhDmoIDwjX2AzFuXYyQbw==',
+                url: '/api/delete-code/,
                 type: 'GET',
                 success: function(response, statusText, xhr) {
                     console.log('Old codes deleted, status:', xhr.status);
@@ -41,17 +41,15 @@
 
         // Function to update the attendance code from Azure Function
         function updateAttendanceCode() {
-            deleteOldCodes(); // Delete old codes before updating the new code
-
             $.ajax({
-                url: 'https://tempcodes.azurewebsites.net/api/GenerateCodeFunction?code=74pbScwXMtLf6JDxQy6s8MpIEHTHXke6q-7mP5BX-JkIAzFumSyvkQ==',
+                url: '/api/azure-function/', // URL of the Django endpoint
                 type: 'GET',
                 success: function(response) {
                     console.log('New code fetched:', response.code);
                     $('#attendanceCode').text(response.code);
                 },
                 error: function(error) {
-                    console.log('Error fetching new code:', error);
+                    console.log('Error:', error);
                 }
             });
         }
