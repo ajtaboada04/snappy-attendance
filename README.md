@@ -38,7 +38,7 @@ The Attendance Management System is a digital platform designed to enhance the m
 <br>
 <p align="center">
   <img width="75%" alt="Screenshot 6" src="https://github.com/rorosaga/Classlink/assets/133862511/45c551ac-62e8-4e27-9b61-e02aa260ae42">
-  <br><br>When the professor logs in the following screen is presented, displaying a successfull login and the name of the user.
+  <br><br>When the professor logs in the following screen is presented, displaying a successfull login and the name of the user.<br>
 </p>
 
 <br><br>
@@ -83,19 +83,17 @@ The Attendance Management System is a digital platform designed to enhance the m
 
 <p align="center">
   <img width="75%" alt="Screenshot 1" src="https://github.com/rorosaga/Classlink/assets/133862511/c1df9948-70c9-40b8-94c6-7c1f530f7c0e">
-  <br>Text for Image 1
+  <br><br>When the student logs in the following screen is presented, displaying a successfull login and the name of the user.<br><br><br>
 </p>
-
-
 
 <p align="center">
   <img width="75%" alt="Screenshot 3" src="https://github.com/rorosaga/Classlink/assets/133862511/ce815f88-0b4a-4739-a686-0a952c86e816">
-  <br>Text for Image 3
+  <br><br>The student will want to have the possibility to check their own attendance for a determined class, thus the student can select the course of interest and query the attendance log. The log is presented in a easy user-friendly style displaying the date of the session, the session number and the status of presenece (present/absent)<br><br><br>
 </p>
 
 <p align="center">
   <img width="75%" alt="Screenshot 4" src="https://github.com/rorosaga/Classlink/assets/133862511/dec8a74f-8e33-43e4-9cbc-5239556ef250">
-  <br>Text for Image 4
+  <br><br>The student will have to insert the generated code for the attendance process to be complete. 
 </p>
 
 
