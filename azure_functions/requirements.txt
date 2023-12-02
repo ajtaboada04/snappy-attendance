@@ -1,0 +1,21 @@
+# Do not include azure-functions-worker as it may conflict with the Azure Functions platform
+
+azure-common==1.1.28
+azure-core==1.29.5
+azure-cosmosdb-nspkg==2.0.2
+azure-cosmosdb-table==1.0.6
+azure-functions==1.17.0
+azure-nspkg==3.0.2
+azure-storage-queue==12.8.0
+certifi==2023.11.17
+cffi==1.16.0
+charset-normalizer==3.3.2
+cryptography==41.0.5
+idna==3.4
+isodate==0.6.1
+pycparser==2.21
+python-dateutil==2.8.2
+requests==2.31.0
+six==1.16.0
+typing_extensions==4.8.0
+urllib3==2.1.0
