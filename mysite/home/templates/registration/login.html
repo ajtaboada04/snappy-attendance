@@ -1,14 +1,37 @@
+{% load static %}
 
 {% block content %}
+<html>
+<head>
+    <title>Login</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+<head>
+  <body>
+<div class="container mt-5">
+    <div class="jumbotron bg-light text-center">
+        <h1 class="display-4 text-primary">Login</h1>
+        <p class="lead">Please enter your credentials to login.</p>
 
-{% if form.errors %}
-  <p>Your username and password didn't match. Please try again.</p>
-{% endif %}
+        {% if form.errors %}
+            <div class="alert alert-danger" role="alert">
+                Your username and password didn't match. Please try again.
+            </div>
+        {% endif %}
 
-<form method="post" action="{% url 'login' %}">
-{% csrf_token %}
-{{ form.as_p }}
-<input type="submit" class="btn btn-primary" value="Login" />
-<input type="hidden" name="next" value="{{ next }}" />
-</form>
+        <form method="post" action="{% url 'login' %}" class="mt-4">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" class="btn btn-primary" value="Login" />
+            <input type="hidden" name="next" value="{{ next }}" />
+        </form>
+    </div>
+</div>
+</body>
+
 {% endblock %}
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</html>

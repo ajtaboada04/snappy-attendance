@@ -1,11 +1,29 @@
 
 import os
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
+
+# Code generation function
+GENERATE_CODE_FUNC = os.getenv('GENERATE_CODE')
+GENERATE_CODE_KEY = os.getenv('GENERATE_CODE_KEY')
+
+# Code validation function
+VALIDATE_CODE_FUNC = os.getenv('VALIDATE_CODE')
+VALIDATE_CODE_KEY = os.getenv('VALIDATE_CODE_KEY')
+
+# Delete codes function
+DELETE_CODES_FUNC = os.getenv('DELETE_CODES')
+DELETE_CODES_KEY = os.getenv('DELETE_CODES_KEY')
+
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Used for a default title
-APP_NAME = 'Classlink'   # Add
+APP_NAME = 'Snappy'   # Add
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'g$iqqu&*mw4_sg3(#ld0sqaalxebel&168^yj%i&sgrw(fmn@w'
@@ -83,8 +101,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'DUDB_3',
         'USER': 'DUDB_3',
-        'PASSWORD': '8ReukdQCXc6u_kOaWNc3cYBaxU86Li4nWLUbq8Rv-j8',
-        'HOST': 'dockerlab.westeurope.cloudapp.azure.com',
+        'PASSWORD':  os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_URL'),
         'PORT': '3306',
         'OPTIONS': {
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
