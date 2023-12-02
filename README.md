@@ -17,12 +17,12 @@ The Attendance Management System is a digital platform designed to enhance the m
 
 ## How to Navigate the System:
 
-<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+<div style="display: flex; justify-content: space-between; align-items: left; margin-bottom: 20px;">
   <img src="https://github.com/rorosaga/Classlink/assets/133862511/c1df9948-70c9-40b8-94c6-7c1f530f7c0e" alt="Initial Screen" width="45%">
   <div style="width: 50%;">Your Text Here</div>
 </div>
 
-<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+<div style="display: flex; justify-content: space-between; align-items: right; margin-bottom: 20px;">
   <div style="width: 50%;">Your Text Here</div>
   <img src="https://github.com/rorosaga/Classlink/assets/133862511/32d44463-d570-47f1-98fe-ea10bf551c22" alt="Secondary Screen" width="45%">
 </div>
