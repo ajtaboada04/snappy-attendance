@@ -28,7 +28,7 @@
         // Function to delete old codes from Azure Table Storage
         function deleteOldCodes() {
             $.ajax({
-                url: '/api/delete-code/,
+                url: '/api/delete-code/', // URL of the Django endpoint
                 type: 'GET',
                 success: function(response, statusText, xhr) {
                     console.log('Old codes deleted, status:', xhr.status);
