@@ -105,12 +105,12 @@ The Attendance Management System is a digital platform designed to enhance the m
 
 <p align="center">
   <img width="75%" alt="Screenshot 2" src="https://github.com/rorosaga/Classlink/assets/133862511/32d44463-d570-47f1-98fe-ea10bf551c22">
-  <br>Text for Image 2
+  <br><br><br>Once the login is done, the system is informed of the position the user holds, therefore if a student were to try and enter the professors dashboard he would recieve the following error message.<br><br>
 </p>
 
 <p align="center">
   <img width="75%" alt="Screenshot 5" src="https://github.com/rorosaga/Classlink/assets/133862511/b78ff57f-f35a-4572-b42f-c733522d3c07">
-  <br>Text for Image 5
+  <br><br><br>In the case in which the student submits an incorrect code the system will notify them with an error message and ask them to try again.
 </p>
 
 
