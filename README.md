@@ -18,6 +18,16 @@ The Attendance Management System is a digital platform designed to enhance the m
 <br>
 
 <h1 align="center">The System Architecture:</h1>
+<p align="center">
+  <img width="75%" alt="architecture (1) (1)" src="https://github.com/rorosaga/snappy-attendance/assets/133862511/9fbf1b10-e51a-46ef-a6de-60f05df72bb2"><br><br>
+  Django backend deployed on Azure App Service.<br>
+  Three serverless functions: code generation, code deletion, code validation.<br>
+  API endpoint to connect to MySQL database and to perform CRUD operations<br>
+  Dead Letter Queue for logging errors<br>
+  AJAX used to dynamically update the page.<br>
+
+</p>
+
 
 <br>
 <br>
