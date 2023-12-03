@@ -171,6 +171,9 @@ The Attendance Management System is a digital platform designed to enhance the m
 </p>
 
 
+## Validate Code Function
+
+
 | Code                     | Explaination                                                                                                                                                                                                                                                                                                              |
 |-----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **main(req: func.HttpRequest) -> func.HttpResponse:** | Defines the main function, which is the entry point for the Azure Function. It takes an HTTP request as input and returns an HTTP response. |
