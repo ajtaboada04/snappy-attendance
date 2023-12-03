@@ -7,3 +7,4 @@ azure_env
 .venv
 venv
 .env
+django_env
