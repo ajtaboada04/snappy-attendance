@@ -1,11 +1,11 @@
 import os
 import django
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "home.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.settings")
 django.setup()
 
 from django.contrib.auth.models import User
-from your_app.models import Professor, Student, Course
+from home.models import Professor, Student, Course
 
 # Function to create user and assign role-specific profile
 def create_user(username, email, password, role, name, courses):

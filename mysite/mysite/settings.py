@@ -26,10 +26,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 APP_NAME = 'Snappy'   # Add
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'g$iqqu&*mw4_sg3(#ld0sqaalxebel&168^yj%i&sgrw(fmn@w'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 # ADD YOUR SELECTED HOST
 ALLOWED_HOSTS = []
@@ -216,10 +216,10 @@ if (len(sys.argv) >= 2 and sys.argv[1] == 'runserver'):
 
 # REMOVE '#' BELOW BEFORE DEPLOYING
 
-# CSRF_COOKIE_DOMAIN = 'snappy-attendance.azurewebsites.net'
-# CSRF_TRUSTED_ORIGINS = ['https://*.azurewebsites.net']
+CSRF_COOKIE_DOMAIN = 'snappy-attendance.azurewebsites.net'
+CSRF_TRUSTED_ORIGINS = ['https://*.azurewebsites.net']
 
-# SESSION_COOKIE_SECURE = True
-# CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 
-# CSRF_COOKIE_SAMESITE = 'None'
+CSRF_COOKIE_SAMESITE = 'None'
