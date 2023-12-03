@@ -157,6 +157,22 @@ The Attendance Management System is a digital platform designed to enhance the m
 </p>
 
 
+| Code                     | Explaination                                                                                                                                                                                                                                                                                                              |
+|-----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **main(req: func.HttpRequest) -> func.HttpResponse:** | Defines the main function, which is the entry point for the Azure Function. It takes an HTTP request as input and returns an HTTP response. |
+| **Try-Except Block:**        | Catches exceptions that may occur during the execution of the function.  |
+| **JSON Content Retrieval:** | Attempts to get the JSON content from the HTTP request. If there's no 'code' in the request body, it returns a 400 Bad Request response asking for the 'code'.   |
+| **Azure Cosmos DB Setup:**   | Establishes a connection to Azure Cosmos DB. Defines the names of tables and queues to be used (TempCodes, LogAttempts, log-error-attempts). |
+| **Entity Querying:**         | Queries entities in the 'TempCodes' table where the partition key is 'Codes'. |
+| **Entity Matching Loop:**    | Checks if the received code matches any of the codes in the 'TempCodes' table. If a match is found, logs the attempt as successful in the 'LogAttempts' table and returns a 200 OK response with "true". If no match is found, logs the attempt as unsuccessful and sends an error message to the 'log-error-attempts' queue. Returns a 400 Bad Request response with "false". |
+| **No Entities Found:**       | If there are no entities in the 'TempCodes' table, returns a 400 Bad Request response with "No code found in the table."   |
+| **Exception Handling:**      | Catches any exceptions that occur during the execution. Logs the traceback and returns a 500 Internal Server Error response with the error message. |
+
+
+<br>
+<br>
+<br>
+
 ## Acknowledgments
 - Credits to the original "Qwickly" application for inspiration.
 - Thanks to all contributors who have invested their time in improving this project.
