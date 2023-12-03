@@ -1,7 +1,7 @@
 <h1 align="center">Snappy</h1>
 <br>
 
-## Overview
+## Overview [![Google Slides](https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Google_Slides_logo_%282014-2020%29.svg/15px-Google_Slides_logo_%282014-2020%29.svg.png)](https://docs.google.com/presentation/d/1oHVmyuj295BDY9uNqpb1K2tNeo3f6BCWNAtYgFcvDyw/edit?usp=sharing)
 The Attendance Management System is a digital platform designed to enhance the management and tracking of students' attendance. It's built upon the concept of the "Qwickly" application, but with several advancements for accuracy and user experience. This system employs a combination of authentication methods, requiring individual accounts validated through university email credentials.
 
 <br>
@@ -96,6 +96,7 @@ The Attendance Management System is a digital platform designed to enhance the m
 | `delete_code_from_table(...)`                   | Deletes the expired code from the table.                                        |
 | `log_msg = f"Deleted code: {entity.RowKey}"`    | Logs a message for each deleted code.                                           |
 | `return func.HttpResponse("Cleanup completed...` | Returns a success message if cleanup is successful, else an error message.       |
+
 
 <br><br><br>
 <p align="center">
