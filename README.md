@@ -57,6 +57,22 @@ The Attendance Management System is a digital platform designed to enhance the m
 | **Context Assignment:**     | Assigns the queried `course` to the context, sets `is_professor` flag to `False`.                                                                             |
 | **Render Template:**        | Renders the template with the provided context.                                                                                                                |
 
+<br><br>
+
+
+<h2 align="center">Script to poulate the model:</h2><br><br>
+
+
+| Section                   | Description                                                                                                                |
+|---------------------------|----------------------------------------------------------------------------------------------------------------------------|
+| **Django Setup**          | Sets the default Django settings module and initializes the Django environment.                                           |
+| **Import Statements**     | Imports required modules and models from Django (`User`, `Professor`, `Student`, `Course`).                                 |
+| **Function `create_user`**| - Takes parameters: `username`, `email`, `password`, `role`, `name`, and `courses`.                                        |
+|                           | - Creates a new user using `User.objects.create_user`.                                                                      |
+|                           | - Creates a role-specific profile (`Professor` or `Student`).                                                              |
+|                           | - Assigns courses to the user profile based on the specified role.                                                          |
+
+
 
 <br><br>
 ## Professor's Navigation through the System
