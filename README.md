@@ -171,7 +171,8 @@ The Attendance Management System is a digital platform designed to enhance the m
 </p>
 
 
-## Validate Code Function
+
+<h2 align="center">Validate Code Function:</h2>
 
 
 | Code                     | Explaination                                                                                                                                                                                                                                                                                                              |
