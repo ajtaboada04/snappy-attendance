@@ -4,5 +4,7 @@
     "azureFunctions.pythonVenv": "azure_env",
     "azureFunctions.projectLanguage": "Python",
     "azureFunctions.projectRuntime": "~3",
-    "debug.internalConsoleOptions": "neverOpen"
+    "debug.internalConsoleOptions": "neverOpen",
+    "appService.defaultWebAppToDeploy": "/subscriptions/e0b9cada-61bc-4b5a-bd7a-52c606726b3b/resourceGroups/DUDB_3/providers/Microsoft.Web/sites/snappy-attendance",
+    "appService.deploySubpath": "mysite"
 }
