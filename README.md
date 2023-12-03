@@ -59,12 +59,45 @@ The Attendance Management System is a digital platform designed to enhance the m
   <br><br>It is not uncommon for a professor to be teaching more than one class throughout the semester, therefore in the case of Edoardo, the professor will select the class he is teaching and start the attendance process by pressing the button "Display Code"<br><br>
 </p>
 
+<h1 align="center">Generate Codes Functions:</h1><br><br>
+
+| Code                                                  | Explanation                                                                   |
+|-------------------------------------------------------|-------------------------------------------------------------------------------|
+| `def main(req: func.HttpRequest) -> func.HttpResponse:` | Defines the main function, the entry point for the Azure Function. Takes an HTTP request as input and returns an HTTP response. |
+| `six_digit_code = str(random.randint(100000, 999999))` | Generates a random six-digit code.                                             |
+| `table_service = TableService(connection_string=os.environ['AzureWebJobsStorage'])`<br>`table_name = 'TempCodes'` | Establishes a connection to Azure Cosmos DB table using the provided connection string. Sets the table name to 'TempCodes'. |
+| `entity = Entity()`<br>`entity.PartitionKey = 'Codes'`<br>`entity.RowKey = six_digit_code`<br>`entity.Timestamp = datetime.datetime.utcnow()` | Creates an Entity object representing a record in Azure Cosmos DB table. Sets partition key to 'Codes', row key to the generated code, and timestamp to current UTC time. |
+| `table_service.insert_entity(table_name, entity)` | Inserts the created entity into 'TempCodes' table in Azure Cosmos DB.          |
+| `response_body = json.dumps({"code": six_digit_code})` | Prepares a JSON response body containing the generated six-digit code.        |
+| `return func.HttpResponse(response_body, mimetype="application/json")` | Returns an HTTP response with the JSON response body containing the generated code, sent back to the client. |
+
+
+<br><br><br>
+
+
 <p align="center">
   <img width="75%" alt="Screenshot 10" src="https://github.com/rorosaga/Classlink/assets/133862511/88d232f7-7bba-4381-9892-27f7aa0ed987">
   <br><br><br>The following page will show displaying the code necessary for the students to complete the attendance process
   <br><br>
 </p>
+<br><br>
+<h1 align="center">Delete Codes Functions:</h1><br><br>
 
+| Code                                           | Explanation                                                                      |
+|------------------------------------------------|----------------------------------------------------------------------------------|
+| `table_service = TableService(connection_string=os.environ['AzureWebJobsStorage'])` | Initializes a connection to Azure Cosmos DB table using the provided connection string. |
+| `table_name = "TempCodes"`                      | Specifies the table name as "TempCodes".                                         |
+| `partition_key = "Codes"`                       | Sets the partition key as "Codes".                                               |
+| `entities = table_service.query_entities(...)`  | Queries entities (codes) from the table with the specified partition key.        |
+| `current_time = datetime.datetime.utcnow()...` | Gets the current time in UTC.                                                   |
+| `if entities.items:`                            | Checks if entities (codes) are found.                                           |
+| `for entity in entities:`                       | Iterates over the retrieved entities.                                           |
+| `if time_difference.total_seconds() > 30:`      | Checks if the code has expired (more than 30 seconds old).                       |
+| `delete_code_from_table(...)`                   | Deletes the expired code from the table.                                        |
+| `log_msg = f"Deleted code: {entity.RowKey}"`    | Logs a message for each deleted code.                                           |
+| `return func.HttpResponse("Cleanup completed...` | Returns a success message if cleanup is successful, else an error message.       |
+
+<br><br><br>
 <p align="center">
   <img width="75%" alt="Screenshot 11" src="https://github.com/rorosaga/Classlink/assets/133862511/d823b01f-2c69-46fb-beac-e2f0ecb6d525">
   <br><br><br>In the case of 'orange status' students, the professor has the possibility to change manually the attendance. This would also be useful in the case in which a student has attended a seminar/presentation with IE which excuses the absences of a student.<br><br>
