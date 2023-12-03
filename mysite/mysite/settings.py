@@ -31,10 +31,10 @@ SECRET_KEY = 'g$iqqu&*mw4_sg3(#ld0sqaalxebel&168^yj%i&sgrw(fmn@w'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['snappy-attendance.azurewebsites.net']
+# ADD YOUR SELECTED HOST
+ALLOWED_HOSTS = []
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -151,7 +151,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'   # Add
-STATIC_ROOT = BASE_DIR / 'staticfiles'   # Add
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
 REST_FRAMEWORK = {
@@ -213,3 +213,13 @@ if (len(sys.argv) >= 2 and sys.argv[1] == 'runserver'):
         }
     }
 '''
+
+# REMOVE '#' BELOW BEFORE DEPLOYING
+
+# CSRF_COOKIE_DOMAIN = 'snappy-attendance.azurewebsites.net'
+# CSRF_TRUSTED_ORIGINS = ['https://*.azurewebsites.net']
+
+# SESSION_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
+
+# CSRF_COOKIE_SAMESITE = 'None'
