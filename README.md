@@ -17,6 +17,11 @@ The Attendance Management System is a digital platform designed to enhance the m
 <br>
 <br>
 
+<h1 align="center">The System Architecture:</h1>
+
+<br>
+<br>
+
 
 <h1 align="center">How to Navigate the System:</h1>
 
