@@ -6,5 +6,4 @@ azure_env
 .python_packages
 .venv
 venv
-.env
 django_env
