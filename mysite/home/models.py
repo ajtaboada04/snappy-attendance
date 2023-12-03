@@ -3,10 +3,10 @@ from django.conf import settings
 from django.core.validators import MinLengthValidator
 import datetime
 
-# Create your models here.
-
+# SessionManager: Used to create new sessions
 class SessionManager(models.Manager):
     def create_new_session(self, course, date):
+        
         # Calculate the next session number
         last_session = Session.objects.filter(course=course).order_by('session_number').last()
         next_session_number = last_session.session_number + 1 if last_session else 1
@@ -15,6 +15,7 @@ class SessionManager(models.Manager):
         session = self.create(course=course, date=date, session_number=next_session_number)
         return session
 
+# Course: model for courses
 class Course(models.Model):
     course_name = models.CharField(max_length=255, validators=[MinLengthValidator(2, "Course name must be greater than 2 characters")])
     semester = models.CharField(max_length=255)
@@ -23,6 +24,7 @@ class Course(models.Model):
     def __str__(self):
         return self.course_name
 
+# Professor: model for professors
 class Professor(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     name = models.CharField(max_length=255, validators=[MinLengthValidator(2, "Name must be greater than 2 characters")])
@@ -31,6 +33,7 @@ class Professor(models.Model):
     def __str__(self):
         return self.name
 
+# Student: model for students
 class Student(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     name = models.CharField(max_length=255, validators=[MinLengthValidator(2, "Name must be greater than 2 characters")])
@@ -38,7 +41,9 @@ class Student(models.Model):
 
     def __str__(self):
         return self.name
-    
+
+# Session: model for a particular class session
+# created using the SessionManager
 class Session(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     session_number = models.IntegerField(default=1)
@@ -54,7 +59,9 @@ class Session(models.Model):
             string_parts.append(f"{record.student.name} - {record.date} - {record.status}")
 
         return '\n'.join(string_parts)
-    
+
+# Attendance: model for attendance records
+# for a particular student on a particular date
 class Attendance(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     date = models.DateField(default=datetime.date.today)
