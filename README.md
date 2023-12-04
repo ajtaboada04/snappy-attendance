@@ -42,20 +42,6 @@ The Attendance Management System is a digital platform designed to enhance the m
   <img width="75%" alt="Screenshot 13" src="https://github.com/rorosaga/Classlink/assets/133862511/5ce32413-2d12-4286-9a96-16ba8a793548">
   <br><br>Snappy's homescreen presents itself as symplistic although efficient. It displays three possible paths: Login, Professor Dashboard and Student Dashboard. The user then logs in and starts the systems navigation.
 </p>
-<br>
-<h2 align="center">Frontend and Backend Connection:</h2>
-<br>
-
-| Section                    | Description                                                                                                                                                     |
-|----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Class Name:**             | `ConfirmationView`                                                                                                                                             |
-| **Inheritance:**            | `LoginRequiredMixin`, `View`                                                                                                                                   |
-| **Template Name:**          | "home/confirmation.html"                                                                                                                                       |
-| **HTTP Method Handling:**   | Defines a `get` method to handle HTTP GET requests.                                                                                                            |
-| **Context Initialization:** | Initializes a context dictionary.                                                                                                                              |
-| **Get Class ID:**           | Retrieves `class_id` from the session and queries a `Course` object using `get_object_or_404`.                                                                 |
-| **Context Assignment:**     | Assigns the queried `course` to the context, sets `is_professor` flag to `False`.                                                                             |
-| **Render Template:**        | Renders the template with the provided context.                                                                                                                |
 
 <br><br>
 
